@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  app:
+    build: ./app
+    image: filipebastos/nodejs:prod
+    container_name: nodejs
+    networks:
+      - fullcyclenet
+
+  reverse-proxy:
+    build: ./nginx
+    image: filipebastos/nginx:prod
+    container_name: nginx
+    networks:
+      - fullcyclenet
+    ports:
+      - "80:80"
+
+networks:
+  fullcyclenet:
+    driver: bridge
